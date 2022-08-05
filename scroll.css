@@ -1,0 +1,33 @@
+body{
+	margin:0;
+	padding: 0;
+	
+}
+.scroll-bg{
+	 background: #efefef; 
+	 background: linear-gradient(top, #efefef 0%, #ff471a 30%);  
+	 background: -moz-linear-gradient(top, #efefef 0%, #ff471a 30%); 
+	 background: -webkit-linear-gradient(top, #efefef 0%,#ff471a 30%); 
+	 box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
+	 width: 1000px;
+	 margin: 10% auto;
+	 padding:30px;
+	 border-radius: 20px;
+}
+.scroll-div{
+		background: #878585;
+		width: 1000px;
+		height: 350px;
+		overflow: hiddden;
+		overflow-y: scroll;
+		
+}
+.scroll-object{
+	color: #313131;
+	font-family: Helvetica, sans-serif;
+	font-size: 15px;
+	padding: 20px;
+}
+p{
+	color:#313131;
+}
