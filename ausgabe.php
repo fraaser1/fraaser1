@@ -1,36 +1,7 @@
 <?php
 // Include config file
 require_once "../config.php";
-?>
 
-<!DOCTYPE html>
-<html lang="de">
-<head> 
-		 <meta charset="utf-8">
-		 <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="icon" type="image/icon" sizes="16x16" href="favicon.ico">
-			<link rel="stylesheet" href="quiz.css"> 
-			<link rel="stylesheet" href="kontakte.css">
-			
-<style>
-	table {
-	  font-family: arial, sans-serif;
-	  border-collapse: collapse;
-	  width: 100%;
-	}
-
-	td, th {
-	  border: 1px solid #dddddd;
-	  text-align: left;
-	  padding: 8px;
-	}
-
-	tr:nth-child(even) {
-	  background-color: #bbbbbb;
-	}
-</style>
-
-<?php
 $benutzername = $id = $benutzernameERR = $idErr = "";
 $vorname = $nachname = $email = $timestamp = $bild = $geschlecht = "";
 $zaehler = 0;
@@ -114,6 +85,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	  }
 
 }
+
+?>
+
+<!DOCTYPE html>
+<html lang="de">
+<head> 
+		 <meta charset="utf-8">
+		 <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="icon" type="image/icon" sizes="16x16" href="favicon.ico">
+			<link rel="stylesheet" href="quiz.css"> 
+			<link rel="stylesheet" href="kontakte.css">
+			
+<style>
+	table {
+	  font-family: arial, sans-serif;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #bbbbbb;
+	}
+</style>
+
+<?php
 
 ?>
        
