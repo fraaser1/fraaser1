@@ -196,12 +196,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		?>
 
 				Kontakt:<br>
-				Sandra Husseneder<br>
+				Sepp Hase<br>
 				Marlene-Dietrich-Straße 1<br>     	
 				89231 Neu-Ulm<br><br>
 				Telefon:0731 98491- <br>
 				Fax: 0731 98491-88<br>
-				E-Mail:SHusseneder@ctc-lohr.net
+				E-Mail:SHase@ctc-lohr.net
 		 </div>
 	</div>
 </body>
