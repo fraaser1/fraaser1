@@ -166,10 +166,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			
 			<label for="id" style="color:white;">Bitte geben Sie Ihre ID ein: <b class="error"  style="color:red;">* <?php echo "<br>".$idErr;?></b></label>		
 			<input name="id" type="number" class="feedback-input" placeholder="ID"  min="1" max="1000" value="<?php echo $id;?>">
-			
-			
-			
+				
 			<input type="submit" value="Absenden">
+			<br>
+			<b class="error"  style="color:red;">* Pflichtfeld</b>
 		</form>
 	<div style="text-align:center;color:white;font-size:1.1em;">	
 		<?php
