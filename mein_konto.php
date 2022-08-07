@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	tr:nth-child(even) {
-	  background-color: #bbbbbb;
+	  background-color: #aaaaaa;
 	}
 </style>
 
