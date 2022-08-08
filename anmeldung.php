@@ -2,18 +2,34 @@
 require_once "config.php";
  
 		
-         
-         $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName = $geschlecht =  $id = "";
-				   
-			if($_SERVER["REQUEST_METHOD"] == "POST") {
+          
+        
+ 
+        $geschlecht = $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName =  $id =$emailErr = $benutzernameErr = $vornameErr = $nachnameErr = "";
+
+		$allowed_files = [
+			'image/jpeg' => 'jpg',
+			'image/gif' => 'gif',
+			'image/png' => 'png',
+			'application/pdf' => 'pdf'];
+
+		function test_input($data) {
+			$data = trim($data);
+			$data = stripslashes($data);
+			$data = htmlspecialchars($data);
+			return $data;
+	}
+
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+ {
 			
-				$vorname = test_input($_POST['vorname']);
-				$nachname = test_input($_POST['nachname']);
-				$benutzername = test_input($_POST['benutzername']);
-				$email = test_input($_POST['email']);
-				$geschlecht = test_input($_POST['geschlecht']);
-				echo $geschlecht;
-			}
+			$vorname = test_input($_POST['vorname']);
+			$nachname = test_input($_POST['nachname']);
+			$benutzername = test_input($_POST['benutzername']);
+			$email = test_input($_POST['email']);
+			$geschlecht = test_input($_POST['geschlecht']);
+			
+			
 	//var_dump($_SERVER);
 
 			$anrede = "";
@@ -23,35 +39,13 @@ require_once "config.php";
 			case "w": $anrede = "Frau"; break;
 			default: $anrede = $vorname;
 			}
-	
-		$begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Registrierung! Dein Benutzername ist " . $benutzername . " und deine ID ist " . $id .". Viel Spaß";
-		
-	
-	
-
-	
-	function test_input($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
-
-   $allowed_files = [
-  'image/jpeg' => 'jpg',
-  'image/gif' => 'gif',
-  'image/png' => 'png',
-  'application/pdf' => 'pdf'];
-  
+			
 //Benutzer anlegen insert into
 
 		$sql = "INSERT INTO benutzer (vorname, nachname, benutzername, email, timestamp, bild, geschlecht) VALUES (?,?,?,?,?,?,?) ;";
-		/*if (mysqli_query($link, $sql)) {
-				$last_id = mysqli_insert_id($link);
-					echo "New record created successfully. Last inserted ID 	is: " . $last_id;
-						} else {
-							echo "Error: " . $sql . "<br>" . mysqli_error($link);*/
-}
+
+		
+		
 		/*if (mysqli_query($link, $sql)) {
 		echo "Neuen Eintrag erfolgreich gespeichert. <br>";
 		} else {
@@ -60,26 +54,16 @@ require_once "config.php";
 		
 		$stmt = mysqli_prepare($link, $sql);
 		mysqli_stmt_bind_param($stmt, 'sssssss', $vorname, $nachname, $benutzername, $email, $timestamp, $localFileName, $geschlecht);
-		
-		
-			if (empty($_POST["email"])) {
-				$emailErr = "Email-Adresse ist erforderlich";
-				} else {
-				$email = test_input($_POST["email"]);
-				//  nun testen wir mit der Funktion filter_var() und FILTER_VALIDATE_EMAIL ob Email
-					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-					$emailErr = "Bitte echte Email-Adresse angeben!";
-					echo "FILTER_VALIDATE_EMAIL: ".FILTER_VALIDATE_EMAIL;
-					}
-			}
+
 // hier  braucheb wir die Benutzereingaben , die aus dem Formular ausgelesen und gestestet werden
 
 //Bildvariable wird verarbeitet 
 // Es wurde eine Datei hochgeladen und dabei sind keine Fehler aufgetreten 
-		if(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) { 
-			$type = mime_content_type($_FILES['bild']['tmp_name']); 
-			$localFileName = "./uploads/files/" . $_FILES['bild']['name']; 
-			//Prüfung der Dateiendung 
+
+	if(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) { 
+		$type = mime_content_type($_FILES['bild']['tmp_name']); 
+		$localFileName = "./uploads/files/" . $_FILES['bild']['name']; 
+ //Prüfung der Dateiendung 
 			$extension = strtolower(pathinfo($_FILES['bild']['name'], 
 			PATHINFO_EXTENSION)); 
 			$allowed_extensions = array('png', 'jpg', 'jpeg', 'gif', 'pdf'); 
@@ -89,7 +73,7 @@ require_once "config.php";
 					} 
  //var_dump($_FILES['bild']['tmp_name']);
  //var_dump( $localFileName);
-		if (move_uploaded_file($_FILES['bild']['tmp_name'], $localFileName)) { 
+	if (move_uploaded_file($_FILES['bild']['tmp_name'], $localFileName)) { 
 			//Dateityp überprüfen 
 			if(isset($allowed_files[$type])) { 
 			// Größe überprüfen 
@@ -103,15 +87,70 @@ require_once "config.php";
 					} 
 				} 
 			}
-			
-			
-		if(mysqli_stmt_execute($stmt)){
-			echo "speichern hat geklappt.";
-			mysqli_stmt_close($stmt);
-			}	else{
-				echo "Speichern hat nicht geklappt.";
+		
+
+	
+//ueberprüfen email
+ if (empty($_POST["email"])) {
+        $emailErr = "Email-Adresse ist erforderlich";
+      } else {
+        $email = test_input($_POST["email"]);
+        //  nun testen wir mit der Funktion filter_var() und FILTER_VALIDATE_EMAIL ob Email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          $emailErr = "Bitte echte Email-Adresse angeben!";
+          echo "FILTER_VALIDATE_EMAIL: ".FILTER_VALIDATE_EMAIL;
+          }
+      }
+	  
+	  if (empty($_POST["benutzername"])) {
+		$benutzernameErr = "Eingabe eines Benutzernamens ist erforderlich!";
+	  } else {
+			//hier werden alle Eingaben außer Buchstaben entfernt
+			$benutzername = test_input($_POST["benutzername"]);	
+				//hier wird nochmal abgefragt, dass nur Buchstaben und Zahlen erlaubt sind
+				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*[0-9]*$/",$benutzername)) {
+				  $benutzernameErr = "Es sind nur Buchstaben und Zahlen erlaubt";
+				}else{
+					$zaehler +=1;
+					//speichere, dass Eingabe ok
 				}
+			
+		}
+		
+		if (empty($_POST["vornamen"])) {
+		$vornameErr = "Eingabe eines Vornamens ist erforderlich!";
+	  } else {
+			//hier werden alle Eingaben außer Buchstaben entfernt
+			$vorname = test_input($_POST["vorname"]);	
+				//hier wird nochmal abgefragt, dass nur Buchstaben und Zahlen erlaubt sind
+				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*$/",$vorname)) {
+				  $vornameErr = "Es sind nur Buchstaben erlaubt";
+				}else{
+					$zaehler +=1;
+					//speichere, dass Eingabe ok
+				}
+			
+		}
+		if (empty($_POST["nachname"])) {
+		$nachnameErr = "Eingabe eines Nachnamens ist erforderlich!";
+	  } else {
+			//hier werden alle Eingaben außer Buchstaben entfernt
+			$nachname = test_input($_POST["nachname"]);	
+				//hier wird nochmal abgefragt, dass nur Buchstaben und Zahlen erlaubt sind
+				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*[0-9]*$/",$nachname)) {
+				  $nachnameErr = "Es sind nur Buchstaben und Zahlen erlaubt";
+				}else{
+					$zaehler +=1;
+					//speichere, dass Eingabe ok
+				}
+			
+			}
+		$last_id = mysqli_insert_id($link);
+$begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Registrierung! Dein Benutzername ist " . $benutzername . " und deine ID ist " . $last_id .". Viel Spaß";
+
+}
 	 mysqli_close($link);
+
 ?>
 
 
@@ -165,10 +204,11 @@ require_once "config.php";
 <div class="body">
 	
 		<form method = "POST"  action ="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"  enctype="multipart/form-data">
-		<p> Um sich Registriern zu können füllen sie bitte die Felder vollständig aus:<br><br><?php echo $begruessung; ?></p>
+		<p> Um sich Registriern zu können füllen Sie bitte die Felder vollständig aus:<br><br><?php echo $begruessung; ?></p>
 		 
-		 <p class="eingabe">
-        <label for="geschlecht">Bitte wählen Sie: </label>
+		 
+        <label for="geschlecht"  style="color:white;">Bitte wählen Sie: </label>
+		
 			<select name="geschlecht" id="geschlecht" class="feedback-input">
 			  <option value="<?php echo $geschlecht;?>"></option>
 				<option value="m">männlich</option>
@@ -176,30 +216,30 @@ require_once "config.php";
 				<option value="d">divers</option>
 				<option value="k">keine Angabe</option>
 			</select>
-		</p>
+		
        
 
-		<p class="eingabe">
-			<label for="vorname">Vorname</label>
-			<input type="text" name="vorname" id="vorname" class="feedback-input" placeholder="Vorname">
-		</p>
-		<p class="eingabe">
-		<label for="nachname">Nachname</label>
-			<input type="text" name="nachname" id="nachname"  class="feedback-input" placeholder="Nachname">
-		</p>
-		<p class="eingabe">
-			<label for="benutzername">Benutzername</label>
-			<input type="text" name="benutzername" id="benutzername"  class="feedback-input" placeholder="Benutzername">
-		</p>
-		<p class="eingabe">
-		<label for="email">Bitte geben Sie Ihre Email-Adresse ein: </label>
+		
+			<label for="vorname" style="color:white;" >Vorname<b class="error" style="color:red;"> *<?php echo $vornameErr;?></b></label>
+			<input type="text" name="vorname" id="vorname" class="feedback-input" placeholder="Vorname" value="<?php echo $vorname;?>">
+		
+		
+		<label for="nachname"  style="color:white;">Nachname<b class="error" style="color:red;"> *<?php echo $nachnameErr;?></b></label>
+			<input type="text" name="nachname" id="nachname"  class="feedback-input" placeholder="Nachname" value="<?php echo $nachname;?>">
+		
+		
+			<label for="benutzername" style="color:white;">Benutzername<b class="error" style="color:red;"> *<?php echo $benutzernameErr;?></b></label>
+			<input type="text" name="benutzername" id="benutzername"  class="feedback-input" placeholder="Benutzername" value="<?php echo $benutzername;?>">
+		
+		
+		<label for="email"  style="color:white;">Bitte geben Sie Ihre Email-Adresse ein:<b class="error" style="color:red;"> *<?php echo $emailErr;?></b> </label>
 			<input type="text" name="email" id="email"  class="feedback-input"placeholder="Email-Adresse" value="<?php echo $email;?>">
-				<p class="error" style="color:red;">* <?php echo $emailErr;?></p>
+				
         
-		</p>
-		<p class="eingabe"  >
+	
+		
 			<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-			<label>Bitte wählen Sie ein Bild (*.jpg, *.png, *.gif oder *.pdf) zum Hochladen aus.</label>
+			<label  style="color:white;">Bitte wählen Sie ein Bild (*.jpg, *.png, *.gif oder *.pdf) zum Hochladen aus.</label>
 			<input name="bild" type="file" accept="image/gif,image/jpeg,image/png,application/pdf"> 
 			</p>
 
@@ -209,10 +249,18 @@ require_once "config.php";
 	
 	</form>
 		</div>		
+	<div style="text-align:center;color:white;font-size:1.1em;"><?php
+	
+		if(mysqli_stmt_execute($stmt)){ 
+		echo "speichern hat geklappt.";
+		mysqli_stmt_close($stmt);
+		}	else{
+		echo "Speichern hat nicht geklappt.";
+		}
+?></div>
 
-		
-    
-		<div class="robbi"></div>
+
+	<div class="robbi"></div>
 			
 	   </body>
 	   
