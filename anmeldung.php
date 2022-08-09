@@ -158,7 +158,7 @@ $begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Reg
 	 <head> 
 		 <meta charset="utf-8">
 		 <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="icon" type="image/icon" sizes="16x16" href="favicon.ico">
+			<link rel="icon" type="image/icon" sizes="16x16" href="../bider/favicon.ico">
 			<link rel="stylesheet" href="../css/quiz.css"> 
      		<link rel="stylesheet" href="../css/newsletter.css"> 
 
