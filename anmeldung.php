@@ -259,3 +259,4 @@ $begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Reg
 	   </body>
 	   
 	   </html>
+
