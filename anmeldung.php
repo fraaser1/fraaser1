@@ -238,7 +238,7 @@ if (empty($_POST["nachname"])) {
 					echo "Speichern hat geklappt.";
 					echo "<br>";
 					$last_id = mysqli_insert_id($link);
-					echo "Hallo " . $anrede . " " . $nachname . ",<br>vielen Dank für die Registrierung!<br>Bitte notiere dir die folgenden Infos für den Abruf deiner Daten:<br> Dein Benutzername ist " . $benutzername . "<br>und deine ID ist " . $last_id .".<br>Viel Spaß";
+					echo "Hallo " . $anrede . " " . $nachname . ",<br>vielen Dank für die Registrierung!<br>Bitte notieren sie die folgenden Infos für den Abruf Ihrer Daten:<br> Ihr Benutzername ist " . $benutzername . "<br>und Ihre ID ist " . $last_id .".<br>Viel Spaß";
 					echo "<br>";
 					
 			
