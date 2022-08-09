@@ -200,7 +200,7 @@ $begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Reg
 		<h2 class="text-dark">Quiz für kleine FISI's!</h2>
 	</div>
 	<div>
-		<h2 class="text-dark"> Teste dein Wissen!</h2>	
+		<h2 class="text-dark"> Anmeldung</h2>	
 	</div>
 </header>
 
