@@ -112,8 +112,7 @@ require_once "../php/config.php";
 		if (empty($_POST["vorname"])) {
 		$vornameErr = "Eingabe eines Vornamens ist erforderlich!";
 	  } else {
-			//hier werden alle Eingaben außer Buchstaben entfernt
-			$vorname = test_input($_POST["vorname"]);	
+			//hier werden alle Eingaben außer Buchstaben entfernt	
 				//hier wird nochmal abgefragt, dass nur Buchstaben erlaubt sind
 				$vorname = test_input($_POST["vorname"]);
 					if (!preg_match("/^[a-zA-Z ]*$/",$vorname)) {
