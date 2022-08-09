@@ -109,7 +109,7 @@ require_once "../php/config.php";
 			
 		}
 		
-		if (empty($_POST["vornamen"])) {
+		if (empty($_POST["vorname"])) {
 		$vornameErr = "Eingabe eines Vornamens ist erforderlich!";
 	  } else {
 			//hier werden alle Eingaben außer Buchstaben entfernt
