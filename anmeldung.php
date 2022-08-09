@@ -1,11 +1,9 @@
 <?php
-require_once "config.php";
+require_once "../php/config.php";
  
 		
-          
-        
- 
-        $geschlecht = $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName =  $id =$emailErr = $benutzernameErr = $vornameErr = $nachnameErr = "";
+         
+  $geschlecht = $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName =  $id =$emailErr = $benutzernameErr = $vornameErr = $nachnameErr = "";
 
 		$allowed_files = [
 			'image/jpeg' => 'jpg',
@@ -14,7 +12,7 @@ require_once "config.php";
 			'application/pdf' => 'pdf'];
 
 		function test_input($data) {
-			$data = trim($data);
+			$data = trim($data,"\x00..\x2F\x3A..\x40\x5B..\x60\x7B..\x7F");
 			$data = stripslashes($data);
 			$data = htmlspecialchars($data);
 			return $data;
@@ -87,11 +85,8 @@ require_once "config.php";
 					} 
 				} 
 			}
-		
-
-	
-//ueberprüfen email
- if (empty($_POST["email"])) {
+			//ueberprüfen email
+			if (empty($_POST["email"])) {
         $emailErr = "Email-Adresse ist erforderlich";
       } else {
         $email = test_input($_POST["email"]);
@@ -110,9 +105,6 @@ require_once "config.php";
 				//hier wird nochmal abgefragt, dass nur Buchstaben und Zahlen erlaubt sind
 				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*[0-9]*$/",$benutzername)) {
 				  $benutzernameErr = "Es sind nur Buchstaben und Zahlen erlaubt";
-				}else{
-					$zaehler +=1;
-					//speichere, dass Eingabe ok
 				}
 			
 		}
@@ -122,13 +114,11 @@ require_once "config.php";
 	  } else {
 			//hier werden alle Eingaben außer Buchstaben entfernt
 			$vorname = test_input($_POST["vorname"]);	
-				//hier wird nochmal abgefragt, dass nur Buchstaben und Zahlen erlaubt sind
-				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*$/",$vorname)) {
-				  $vornameErr = "Es sind nur Buchstaben erlaubt";
-				}else{
-					$zaehler +=1;
-					//speichere, dass Eingabe ok
-				}
+				//hier wird nochmal abgefragt, dass nur Buchstaben erlaubt sind
+				$vorname = test_input($_POST["name"]);
+					if (!preg_match("/^[a-zA-Z ]*$/",$vorname)) {
+					$vornameErr = "Bitte nur Buchstaben eingeben";
+					}
 			
 		}
 		if (empty($_POST["nachname"])) {
@@ -136,20 +126,30 @@ require_once "config.php";
 	  } else {
 			//hier werden alle Eingaben außer Buchstaben entfernt
 			$nachname = test_input($_POST["nachname"]);	
-				//hier wird nochmal abgefragt, dass nur Buchstaben und Zahlen erlaubt sind
-				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*[0-9]*$/",$nachname)) {
+				//hier wird nochmal abgefragt, dass nur Buchstaben erlaubt sind
+				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*$/",$nachname)) {
 				  $nachnameErr = "Es sind nur Buchstaben und Zahlen erlaubt";
-				}else{
-					$zaehler +=1;
-					//speichere, dass Eingabe ok
 				}
 			
 			}
-		$last_id = mysqli_insert_id($link);
-$begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Registrierung! Dein Benutzername ist " . $benutzername . " und deine ID ist " . $last_id .". Viel Spaß";
+			
+			
+		if(mysqli_stmt_execute($stmt)){ 
+			
+					echo "speichern hat geklappt.";
+					mysqli_stmt_close($stmt);
+				}	else{
+					echo "Speichern hat nicht geklappt.";
+				}
+				// id zur ausgabe vorbereiten
+				$last_id = mysqli_insert_id($link);
+		//Ausgabe von anrede und id
+$begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Registrierung! Ihr Benutzername ist " . $benutzername . " und deine ID ist " . $last_id .". Viel Spaß";
 
-}
-	 mysqli_close($link);
+
+	
+ }
+					 mysqli_close($link);
 
 ?>
 
@@ -160,8 +160,8 @@ $begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Reg
 		 <meta charset="utf-8">
 		 <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0">
 			<link rel="icon" type="image/icon" sizes="16x16" href="favicon.ico">
-			<link rel="stylesheet" href="quiz.css"> 
-     		<link rel="stylesheet" href="newsletter.css"> 
+			<link rel="stylesheet" href="../css/quiz.css"> 
+     		<link rel="stylesheet" href="../css/newsletter.css"> 
 
        
        <title>Der kleine FISI</title>
@@ -171,36 +171,39 @@ $begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Reg
 		<div><a href="https://www.w3schools.com/" class="button-imgzwei"></a></div>
 
 <header>
-<nav>
-  <ul>
-    <li><a class="nav" href="index.html">Home</a></li>
-    <li><a href="#">Themen</a>
-      <ul>
-        <li><a href="wiso.html">WiSo</a></li>
-        <li><a href="html.html">html,css,js</a></li>
-        <li><a href="#">Windows</a>
-          <ul>
-            <li><a href="quiz.html">WindowsServer</a></li>
-            <li><a href="client.html">WindowsClient</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="anmeldung.php">Anmeldung</a>
-      <ul>
-        <li><a href="impressum.html">Impressum</a></li>
-        <li><a href="datenschutz.html">Datenschutz</a></li>
-      </ul>
-    </li>
-    <li><a href="quiz.html">Start</a></li>
-	<li><a href="kontakte.html">Kontakte</a></li>
-  </ul>
-</nav>
-<div>
-	<h2 class="text-dark">Um deinen Score zu speichern mußt du dich Anmelden oder Registrieren?</h2>
-</div>
-
+	<nav>
+	<ul>
+		<li><a class="nav" href="../index.html">Home</a></li>
+		<li><a href="#">Themen</a>
+		  <ul>
+			<li><a href="../html/wiso.html">WiSo</a></li>
+			<li><a href="../html/html.html">html,css,js</a></li>
+			<li><a href="#">Windows</a>
+			  <ul>
+				<li><a href="../html/quiz.html">WindowsServer</a></li>
+				<li><a href="../html/client.html">WindowsClient</a></li>
+			  </ul>
+			</li>
+		  </ul>
+		</li>
+		<li><a href="../php/anmeldung.php">Anmeldung</a>
+		  <ul>
+			<li><a href="../html/impressum.html">Impressum</a></li>
+			<li><a href="../html/datenschutz.html">Datenschutz</a></li>
+		  </ul>
+		</li>
+		<li><a href="../html/quiz.html">Start</a></li>
+		<li><a href="../php/mein_konto.php">Mein Konto</a></li>
+	 </ul>
+	</nav>
+	<div >
+		<h2 class="text-dark">Quiz für kleine FISI's!</h2>
+	</div>
+	<div>
+		<h2 class="text-dark"> Teste dein Wissen!</h2>	
+	</div>
 </header>
+
 <div class="body">
 	
 		<form method = "POST"  action ="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"  enctype="multipart/form-data">
@@ -245,22 +248,14 @@ $begruessung = "Hallo " . $anrede . " " . $nachname . " vielen Dank für die Reg
 
 			<button type="submit" name = "speichern" id="speichern">Anmelden</button>
 		</p>
-		
-	
+		<b class="error" style="color:red;">* Pflichtfeld</b>
+			<div style="text-align:center; color:white; font-size:1.1em;">
 	</form>
-		</div>		
-	<div style="text-align:center;color:white;font-size:1.1em;"><?php
-	
-		if(mysqli_stmt_execute($stmt)){ 
-		echo "speichern hat geklappt.";
-		mysqli_stmt_close($stmt);
-		}	else{
-		echo "Speichern hat nicht geklappt.";
-		}
-?></div>
+			
 
-
-	<div class="robbi"></div>
+		
+    
+		<div class="robbi"></div>
 			
 	   </body>
 	   
