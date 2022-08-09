@@ -115,7 +115,7 @@ require_once "../php/config.php";
 			//hier werden alle Eingaben außer Buchstaben entfernt
 			$vorname = test_input($_POST["vorname"]);	
 				//hier wird nochmal abgefragt, dass nur Buchstaben erlaubt sind
-				$vorname = test_input($_POST["name"]);
+				$vorname = test_input($_POST["vorname"]);
 					if (!preg_match("/^[a-zA-Z ]*$/",$vorname)) {
 					$vornameErr = "Bitte nur Buchstaben eingeben";
 					}
@@ -128,7 +128,7 @@ require_once "../php/config.php";
 			$nachname = test_input($_POST["nachname"]);	
 				//hier wird nochmal abgefragt, dass nur Buchstaben erlaubt sind
 				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*$/",$nachname)) {
-				  $nachnameErr = "Es sind nur Buchstaben und Zahlen erlaubt";
+				  $nachnameErr = "Bitte nur Buchstaben eingeben";
 				}
 			
 			}
