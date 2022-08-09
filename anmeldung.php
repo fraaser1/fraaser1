@@ -216,7 +216,7 @@ if (empty($_POST["nachname"])) {
     			
 			<!--<input type="hidden" name="MAX_FILE_SIZE" value="2000000">-->
 			<label  style="color:white;">Bitte wählen Sie ein Bild (*.jpg, *.png, *.gif oder *.pdf) zum Hochladen aus.</label>
-			<input name="bild" type="file" accept="image/gif,image/jpeg,image/png,application/pdf"  value="<?php echo $localFileName;?>"> 
+			<input name="bild" type="file" style="color:white;" accept="image/gif,image/jpeg,image/png,application/pdf"  value="<?php echo $localFileName;?>"> 
 			<b class="error"  style="color:red;"><?php echo $fileErr;?></b>
 			
 			<button type="submit" name = "speichern" id="speichern">Anmelden</button>
