@@ -60,7 +60,7 @@ require_once "../php/config.php";
 
 	if(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) { 
 		$type = mime_content_type($_FILES['bild']['tmp_name']); 
-		$localFileName = "./uploads/files/" . $_FILES['bild']['name']; 
+		$localFileName = "../uploads/files/" . $_FILES['bild']['name']; 
  //Prüfung der Dateiendung 
 			$extension = strtolower(pathinfo($_FILES['bild']['name'], 
 			PATHINFO_EXTENSION)); 
@@ -109,13 +109,12 @@ require_once "../php/config.php";
 			
 		}
 		
-		if (empty($_POST["vornamen"])) {
+		if (empty($_POST["vorname"])) {
 		$vornameErr = "Eingabe eines Vornamens ist erforderlich!";
 	  } else {
-			//hier werden alle Eingaben außer Buchstaben entfernt
-			$vorname = test_input($_POST["vorname"]);	
+			//hier werden alle Eingaben außer Buchstaben entfernt	
 				//hier wird nochmal abgefragt, dass nur Buchstaben erlaubt sind
-				$vorname = test_input($_POST["name"]);
+				$vorname = test_input($_POST["vorname"]);
 					if (!preg_match("/^[a-zA-Z ]*$/",$vorname)) {
 					$vornameErr = "Bitte nur Buchstaben eingeben";
 					}
@@ -128,7 +127,7 @@ require_once "../php/config.php";
 			$nachname = test_input($_POST["nachname"]);	
 				//hier wird nochmal abgefragt, dass nur Buchstaben erlaubt sind
 				if (!preg_match("/^[ÄÜÖäüößa-zA-Z-]*$/",$nachname)) {
-				  $nachnameErr = "Es sind nur Buchstaben und Zahlen erlaubt";
+				  $nachnameErr = "Es sind nur Buchstaben erlaubt";
 				}
 			
 			}
