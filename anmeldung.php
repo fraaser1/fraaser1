@@ -1,6 +1,6 @@
 <?php
 require_once "config.php";   
- //platzhalter der benutzten Variablen
+
 $geschlecht = $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName =  $id =$emailErr = $benutzernameErr = $fileErr = $vornameErr = $nachnameErr = $geschlechtErr = $anrede = "";
 $zaehler = 0;
 
@@ -19,7 +19,7 @@ function test_input($data) {
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){			
 			
-	//Benutzer anlegen insert into mit den einzelnen Felder
+	//Benutzer anlegen insert into 
 	$sql = "INSERT INTO benutzer (vorname, nachname, benutzername, email, bild, geschlecht) VALUES (?,?,?,?,?,?) ;";
 	//Prepared-Statement
 	$stmt = mysqli_prepare($link, $sql);
@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 	//Bildvariable wird verarbeitet 
 	// Es wurde eine Datei hochgeladen und dabei sind keine Fehler aufgetreten 
-	(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) { 
+	if(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) { 
 			$type = mime_content_type($_FILES['bild']['tmp_name']);		 
 			//Prüfung der Dateiendung 
 			$extension = strtolower(pathinfo($_FILES['bild']['name'], PATHINFO_EXTENSION)); 
@@ -86,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			}
 	}
 	//Überprüfung Vorname
-	if (empty($_Get["vorname"])) {
+	if (empty($_POST["vorname"])) {
 		$vornameErr = "Eingabe eines Vornamens ist erforderlich!";
 	} else {
 			//hier werden alle Eingaben außer Buchstaben entfernt
@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 //Überprüfung Nachname
-if (empty($_Get["nachname"])) {
+if (empty($_POST["nachname"])) {
 	$nachnameErr = "Eingabe eines Nachnamens ist erforderlich!";
 } else {
 		//hier werden alle Eingaben außer Buchstaben entfernt
@@ -117,7 +117,7 @@ if (empty($_Get["nachname"])) {
 }
 
 	//Geschlecht überprüfen	  
-	if (empty($_GET["geschlecht"])) {
+	if (empty($_POST["geschlecht"])) {
 		$geschlechtErr = "Eingabe einer Auswahl ist erforderlich!";
 	} else {
 			//hier werden alle Eingaben außer Buchstaben und Zahlen entfernt
