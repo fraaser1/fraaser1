@@ -2,7 +2,9 @@
 require_once "config.php";   
 //Definition der verwendeten Variablen, die nicht gleich Initialisiert werden
 $geschlecht = $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName =  $id =$emailErr = $benutzernameErr = $fileErr = $vornameErr = $nachnameErr = $geschlechtErr = $anrede = "";
+//Die bilduploadvariable wird bei Fehlern vom Bildupload auf 0 gesezt
 $bildupload = 1;
+//Felder der korrekten Eingaben werden gezählt
 $zaehler = 0;
 
 //Definition der erlaubten Dateierweiterung beim Bildupload
