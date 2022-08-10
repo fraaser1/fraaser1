@@ -192,7 +192,7 @@ if (empty($_POST["nachname"])) {
 	<form method = "POST"  action ="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"  enctype="multipart/form-data">
 		<p> Um sich Registrieren zu können füllen Sie bitte die Felder vollständig aus:<br><br></p>
 		 		 
-			<label for="geschlecht"  style="color:white;">Bitte wählen Sie: <b class="error" style="color:red;"> *<?php echo $geschlechtErr;?></b> </label>		
+			<label for="geschlecht" style="color:white;">Bitte wählen Sie: <b class="error" style="color:red;"> *<?php echo $geschlechtErr;?></b> </label>		
 			<select name="geschlecht" id="geschlecht" class="feedback-input">
 				<option value="<?php echo $geschlecht;?>"><?php echo $geschlecht;?></option>
 				<option value="m">männlich</option>
@@ -205,23 +205,23 @@ if (empty($_POST["nachname"])) {
 			<label for="vorname" style="color:white;" >Vorname<b class="error" style="color:red;"> *<?php echo $vornameErr;?></b></label>
 			<input type="text" name="vorname" id="vorname" class="feedback-input" placeholder="Vorname" value="<?php echo $vorname;?>">		
 		
-			<label for="nachname"  style="color:white;">Nachname<b class="error" style="color:red;"> *<?php echo $nachnameErr;?></b></label>
-			<input type="text" name="nachname" id="nachname"  class="feedback-input" placeholder="Nachname" value="<?php echo $nachname;?>">		
+			<label for="nachname" style="color:white;">Nachname<b class="error" style="color:red;"> *<?php echo $nachnameErr;?></b></label>
+			<input type="text" name="nachname" id="nachname" class="feedback-input" placeholder="Nachname" value="<?php echo $nachname;?>">		
 		
 			<label for="benutzername" style="color:white;">Benutzername<b class="error" style="color:red;"> *<?php echo $benutzernameErr;?></b></label>
-			<input type="text" name="benutzername" id="benutzername"  class="feedback-input" placeholder="Benutzername" value="<?php echo $benutzername;?>">		
+			<input type="text" name="benutzername" id="benutzername" class="feedback-input" placeholder="Benutzername" value="<?php echo $benutzername;?>">		
 		
-			<label for="email"  style="color:white;">Bitte geben Sie Ihre Email-Adresse ein:<b class="error" style="color:red;"> *<?php echo $emailErr;?></b> </label>
-			<input type="text" name="email" id="email"  class="feedback-input"placeholder="Email-Adresse" value="<?php echo $email;?>">
+			<label for="email" style="color:white;">Bitte geben Sie Ihre Email-Adresse ein:<b class="error" style="color:red;"> *<?php echo $emailErr;?></b> </label>
+			<input type="text" name="email" id="email" class="feedback-input"placeholder="Email-Adresse" value="<?php echo $email;?>">
     			
 			<!--<input type="hidden" name="MAX_FILE_SIZE" value="2000000">-->
 			<label  style="color:white;">Bitte wählen Sie ein Bild (*.jpg, *.png, *.gif oder *.pdf) zum Hochladen aus.</label>
 			<input name="bild" type="file" style="color:white;" accept="image/gif,image/jpeg,image/png,application/pdf"  value="<?php echo $localFileName;?>"> 
-			<b class="error"  style="color:red;"><?php echo $fileErr;?></b>
+			<b class="error" style="color:red;"><?php echo $fileErr;?></b>
 			
-			<button type="submit" name = "speichern" id="speichern">Anmelden</button>
+			<button type="submit" name="speichern" id="speichern">Anmelden</button>
 		</p>
-		<b class="error"  style="color:red;">* Pflichtfeld</b>
+		<b class="error" style="color:red;">* Pflichtfeld</b>
 	
 	</form>
 </div>		
