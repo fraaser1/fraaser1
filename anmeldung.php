@@ -22,14 +22,14 @@ function test_input($data) {
 //Das passiert wenn das Formular abgeschickt wurde:
 if($_SERVER["REQUEST_METHOD"] == "POST"){			
 			
-	//Benutzer anlegen insert into vorbereiten (Prepared-Statement)
+		//Benutzer anlegen insert into vorbereiten (Prepared-Statement)
 	$sql = "INSERT INTO benutzer (vorname, nachname, benutzername, email, bild, geschlecht) VALUES (?,?,?,?,?,?) ;";
 	//Definition des Prepared-Statement
 	$stmt = mysqli_prepare($link, $sql);
 	//Verknüpfung des Prepared-Statement mit den Variablen für die Platzhalter
 	mysqli_stmt_bind_param($stmt, 'ssssss', $vorname, $nachname, $benutzername, $email, $localFileName, $geschlecht);
 			
-	//Überprüfung Email
+		//Überprüfung Email
 	 if (empty($_POST["email"])) {
 			$emailErr = "Email-Adresse ist erforderlich";
 	} else {
