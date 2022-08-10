@@ -1,4 +1,4 @@
-<?ph
+<?php
 require_once "config.php";   
 
 $geschlecht = $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName =  $id =$emailErr = $benutzernameErr = $fileErr = $vornameErr = $nachnameErr = $geschlechtErr = $anrede = "";
