@@ -247,7 +247,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						echo "Hallo " . $anrede . " " . $nachname . ",<br>Vielen Dank für die Registrierung!<br>Bitte notieren Sie die folgenden Infos für den Abruf Ihrer Daten:<br> Ihr Benutzername ist: <b>" . $benutzername . "</b><br>und ihre ID ist: <b>" . $last_id ."</b>.<br>Viel Spaß";
 						echo "<br>";
 						//Sprung zur Ausgabe
-						echo '<meta http-equiv="refresh" content="1; URL=#ausgabe"> ';
+						echo '<meta http-equiv="refresh" content="1; URL=#speichern"> ';
 						//schließen der Verbindung und der Datenbankabfrage
 						mysqli_close($link);
 						mysqli_stmt_close($stmt);
