@@ -230,7 +230,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				<input name="bild" type="file" accept="image/gif,image/jpeg,image/png,application/pdf"  value="<?php echo $localFileName;?>"> 
 				<div><b  style="color:red;"><?php echo $fileErr;?></b></div>
 				<br>
-				<button id="ausgabe" type="submit" name = "speichern" id="speichern">Anmelden</button>
+				<button type="submit" name="speichern" id="speichern">Anmelden</button>
 			</p>
 			<b style="color:red;">* Pflichtfeld</b>
 		
