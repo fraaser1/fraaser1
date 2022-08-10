@@ -28,9 +28,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$stmt = mysqli_prepare($link, $sql);
 	//Verknüpfung des Prepared-Statement mit den Variablen für die Platzhalter
 	mysqli_stmt_bind_param($stmt, 'ssssss', $vorname, $nachname, $benutzername, $email, $localFileName, $geschlecht);
-
-	//Überprüfung ob ein Bild hochgeladen wurde und dieses Bild den Vorgaben entspricht
-	
 			
 	//Überprüfung Email
 	 if (empty($_POST["email"])) {
@@ -109,7 +106,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			}
 	}
 	
-	if(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) {				
+	//Überprüfung ob ein Bild hochgeladen wurde und dieses Bild den Vorgaben entspricht
+		if(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) {				
 			//Prüfung der Dateiendung
 			$extension = strtolower(pathinfo($_FILES['bild']['name'], PATHINFO_EXTENSION)); 
 			$allowed_extensions = array('png', 'jpg', 'jpeg', 'gif', 'pdf'); 
