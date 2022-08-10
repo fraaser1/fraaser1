@@ -2,9 +2,7 @@
 require_once "config.php";   
 //Definition der verwendeten Variablen, die nicht gleich Initialisiert werden
 $geschlecht = $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName =  $id =$emailErr = $benutzernameErr = $fileErr = $vornameErr = $nachnameErr = $geschlechtErr = $anrede = "";
-//Die bilduploadvariable wird bei Fehlern vom Bildupload auf 0 gesezt
 $bildupload = 1;
-//Felder der korrekten Eingaben werden gezählt
 $zaehler = 0;
 
 //Definition der erlaubten Dateierweiterung beim Bildupload
@@ -239,28 +237,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<br >
 	<div  style="text-align:center;color:white;font-size:1.1em;">
 		<?php
-		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			if($zaehler == 5 and $bildupload == 1){
-					if(mysqli_stmt_execute($stmt)){						
-							echo "Speichern hat geklappt.";
-							echo "<br>";
-							//Abfrage der vergebenen ID des Benutzers
-							$last_id = mysqli_insert_id($link);
-							//Begrüßung
-							echo "Hallo " . $anrede . " " . $nachname . ",<br>Vielen Dank für die Registrierung!<br>Bitte notieren Sie die folgenden Infos für den Abruf Ihrer Daten:<br> Ihr Benutzername ist: <b>" . $benutzername . "</b><br>und ihre ID ist: <b>" . $last_id ."</b>.<br>Viel Spaß";
-							echo "<br>";
-							//Sprung zur Ausgabe
-							echo '<meta http-equiv="refresh" content="1; URL=#speichern"> ';
-							//schließen der Verbindung und der Datenbankabfrage
-							mysqli_close($link);
-							mysqli_stmt_close($stmt);
-					}else{
-						echo "Speichern hat nicht geklappt.";
-					}
-				}else {
-					echo "Hier gibt es noch Probleme mit der Eingabe";
+				if(mysqli_stmt_execute($stmt)){						
+						echo "Speichern hat geklappt.";
+						echo "<br>";
+						//Abfrage der vergebenen ID des Benutzers
+						$last_id = mysqli_insert_id($link);
+						//Begrüßung
+						echo "Hallo " . $anrede . " " . $nachname . ",<br>Vielen Dank für die Registrierung!<br>Bitte notieren Sie die folgenden Infos für den Abruf Ihrer Daten:<br> Ihr Benutzername ist: <b>" . $benutzername . "</b><br>und ihre ID ist: <b>" . $last_id ."</b>.<br>Viel Spaß";
+						echo "<br>";
+						//Sprung zur Ausgabe
+						echo '<meta http-equiv="refresh" content="1; URL=#speichern"> ';
+						//schließen der Verbindung und der Datenbankabfrage
+						mysqli_close($link);
+						mysqli_stmt_close($stmt);
+				}else{
+					echo "Speichern hat nicht geklappt.";
 				}
-		}
+			}else {
+				//Falls oben etwas nicht eingegeben wurde oder fehlt
+				echo "Hier gibt es noch Probleme mit der Eingabe";
+			}
 		?>
 	</div>
 	
