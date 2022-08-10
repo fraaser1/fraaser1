@@ -1,6 +1,6 @@
 <?php
 require_once "config.php";   
- 
+ //platzhalter der benutzten Variablen
 $geschlecht = $vorname = $nachname = $begruessung = $benutzername = $email = $localFileName =  $id =$emailErr = $benutzernameErr = $fileErr = $vornameErr = $nachnameErr = $geschlechtErr = $anrede = "";
 $zaehler = 0;
 
@@ -19,7 +19,7 @@ function test_input($data) {
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){			
 			
-	//Benutzer anlegen insert into
+	//Benutzer anlegen insert into mit den einzelnen Felder
 	$sql = "INSERT INTO benutzer (vorname, nachname, benutzername, email, bild, geschlecht) VALUES (?,?,?,?,?,?) ;";
 	//Prepared-Statement
 	$stmt = mysqli_prepare($link, $sql);
@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 	//Bildvariable wird verarbeitet 
 	// Es wurde eine Datei hochgeladen und dabei sind keine Fehler aufgetreten 
-	if(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) { 
+	(!empty($_FILES) && $_FILES['bild']['error'] == UPLOAD_ERR_OK) { 
 			$type = mime_content_type($_FILES['bild']['tmp_name']);		 
 			//Prüfung der Dateiendung 
 			$extension = strtolower(pathinfo($_FILES['bild']['name'], PATHINFO_EXTENSION)); 
