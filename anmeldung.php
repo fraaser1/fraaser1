@@ -237,26 +237,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<br >
 	<div  style="text-align:center;color:white;font-size:1.1em;">
 		<?php
+		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			if($zaehler == 5 and $bildupload == 1){
-				if(mysqli_stmt_execute($stmt)){						
-						echo "Speichern hat geklappt.";
-						echo "<br>";
-						//Abfrage der vergebenen ID des Benutzers
-						$last_id = mysqli_insert_id($link);
-						//Begrüßung
-						echo "Hallo " . $anrede . " " . $nachname . ",<br>Vielen Dank für die Registrierung!<br>Bitte notieren Sie die folgenden Infos für den Abruf Ihrer Daten:<br> Ihr Benutzername ist: <b>" . $benutzername . "</b><br>und ihre ID ist: <b>" . $last_id ."</b>.<br>Viel Spaß";
-						echo "<br>";
-						//Sprung zur Ausgabe
-						echo '<meta http-equiv="refresh" content="1; URL=#speichern"> ';
-						//schließen der Verbindung und der Datenbankabfrage
-						mysqli_close($link);
-						mysqli_stmt_close($stmt);
-				}else{
-					echo "Speichern hat nicht geklappt.";
+					if(mysqli_stmt_execute($stmt)){						
+							echo "Speichern hat geklappt.";
+							echo "<br>";
+							//Abfrage der vergebenen ID des Benutzers
+							$last_id = mysqli_insert_id($link);
+							//Begrüßung
+							echo "Hallo " . $anrede . " " . $nachname . ",<br>Vielen Dank für die Registrierung!<br>Bitte notieren Sie die folgenden Infos für den Abruf Ihrer Daten:<br> Ihr Benutzername ist: <b>" . $benutzername . "</b><br>und ihre ID ist: <b>" . $last_id ."</b>.<br>Viel Spaß";
+							echo "<br>";
+							//Sprung zur Ausgabe
+							echo '<meta http-equiv="refresh" content="1; URL=#speichern"> ';
+							//schließen der Verbindung und der Datenbankabfrage
+							mysqli_close($link);
+							mysqli_stmt_close($stmt);
+					}else{
+						echo "Speichern hat nicht geklappt.";
+					}
+				}else {
+					echo "Hier gibt es noch Probleme mit der Eingabe";
 				}
-			}else {
-				echo "Hier gibt es noch Probleme mit der Eingabe";
-			}
+		}
 		?>
 	</div>
 	
