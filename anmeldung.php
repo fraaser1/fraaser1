@@ -239,7 +239,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<br >
 	<div  style="text-align:center;color:white;font-size:1.1em;">
 		<?php
-			if($zaehler == 5 and $bildupload = 1){
+			if($zaehler == 5 and $bildupload == 1){
 				if(mysqli_stmt_execute($stmt)){						
 						echo "Speichern hat geklappt.";
 						echo "<br>";
