@@ -256,6 +256,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				}else{
 					echo "Speichern hat nicht geklappt.";
 				}
+			}else {
+				echo "Hier gibt es noch Probleme mit der Eingabe";
 			}
 		?>
 	</div>
