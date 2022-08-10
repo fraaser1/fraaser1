@@ -86,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			}
 	}
 	//Überprüfung Vorname
-	if (empty($_POST["vorname"])) {
+	if (empty($_Get["vorname"])) {
 		$vornameErr = "Eingabe eines Vornamens ist erforderlich!";
 	} else {
 			//hier werden alle Eingaben außer Buchstaben entfernt
@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 //Überprüfung Nachname
-if (empty($_POST["nachname"])) {
+if (empty($_Get["nachname"])) {
 	$nachnameErr = "Eingabe eines Nachnamens ist erforderlich!";
 } else {
 		//hier werden alle Eingaben außer Buchstaben entfernt
@@ -117,7 +117,7 @@ if (empty($_POST["nachname"])) {
 }
 
 	//Geschlecht überprüfen	  
-	if (empty($_POST["geschlecht"])) {
+	if (empty($_GET["geschlecht"])) {
 		$geschlechtErr = "Eingabe einer Auswahl ist erforderlich!";
 	} else {
 			//hier werden alle Eingaben außer Buchstaben und Zahlen entfernt
