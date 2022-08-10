@@ -1,3 +1,11 @@
+Hallo Frau Weilemann, unser Projekt können Sie als zip-file herunterladen: PHP_sh_ts_iw_cy.zip
+Dort drin ist auch der Datenbankdump: db_istj.dump
+Wenn Sie das zip in Ihrem DocumentRoot entpacken und die Datenbank einspielen sollte es direkt funktionieren, die index.html ist in Projekt_FISI.
+Die Pfade sind alle realtiv.
+Mit github sind wir nicht wirklich klar gekommen, man kann da ja auch nicht ausprobieren ob das rauskommt was man haben will. Deshalb haben wir alle lokal auf unseren Rechnern gearbeitet und github eigentlich nur zum Austausch der Dateien verwendet. Alles andere wäre ja zusätzlicher Aufwand gewesen um die Dateien zu testen. Es war aber echtes Teamwork, wir haben alle prima zusammen an diesem Projekt gearbeitet!
+
+
+
 - 👋 Hi, I’m @fraaser1
 - 👀 I’m interested in Computers
 - 🌱 I’m currently learning 
